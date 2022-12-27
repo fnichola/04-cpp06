@@ -6,7 +6,7 @@
 /*   By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 01:47:40 by fnichola          #+#    #+#             */
-/*   Updated: 2022/12/27 02:55:20 by fnichola         ###   ########.fr       */
+/*   Updated: 2022/12/27 03:28:31 by fnichola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,11 @@
 
 int main(int argc, char **argv)
 {
-	(void)argc;
-	(void)argv;
+	if (argc == 2)
+	{
+		Convert(argv[1]).printAll();
+		return 0;
+	}
 
 	Convert("c").printAll();
 	debugPrint("------------------------------------------");
@@ -76,5 +79,4 @@ int main(int argc, char **argv)
 	b.printAll();
 	debugPrint("------------------------------------------");
 	return 0;
-
 }

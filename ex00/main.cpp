@@ -6,7 +6,7 @@
 /*   By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 01:47:40 by fnichola          #+#    #+#             */
-/*   Updated: 2022/12/20 03:08:51 by fnichola         ###   ########.fr       */
+/*   Updated: 2022/12/27 02:55:20 by fnichola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,14 @@ int main(int argc, char **argv)
 	debugPrint("------------------------------------------");
 	Convert("123").printAll();
 	debugPrint("------------------------------------------");
+	Convert("0").printAll();
+	debugPrint("------------------------------------------");
+	Convert("-0").printAll();
+	debugPrint("------------------------------------------");
+	Convert("-42").printAll();
+	debugPrint("------------------------------------------");
+	Convert("2147483647").printAll();
+	debugPrint("------------------------------------------");
 	Convert("9007199254740993.0").printAll();
 	debugPrint("------------------------------------------");
 	Convert("9007199254740993").printAll();
@@ -50,23 +58,23 @@ int main(int argc, char **argv)
 	Convert("nan").printAll();
 	debugPrint("------------------------------------------");
 
-	// converter.doConversion("0");
-	// converter.doConversion("1");
-	// converter.doConversion("-1");
-	// converter.doConversion("-42");
-
-	std::string s = "-123.f";
-	std::stringstream ss;
-	ss << s;
-	int x;
-	ss >> x;
-	std::cout << x << std::endl;
-	if (ss.fail())
-		std::cout << "failed" << std::endl;
-	
-	float f = std::numeric_limits<float>::infinity();
-	std::cout << f << std::endl;
-	
+	debugPrint("Default Constructor: Convert a; a = \"123\"");
+	Convert a;
+	a = "123";
+	a.printAll();
+	debugPrint("------------------------------------------");
+	debugPrint("Assignment operator: b = a");
+	Convert b = a;
+	b.printAll();
+	debugPrint("------------------------------------------");
+	debugPrint("Assignment b = \"9999999999999\"");
+	b = "9999999999999";
+	b.printAll();
+	debugPrint("------------------------------------------");
+	debugPrint("Assignment b = \"b\"");
+	b = "b";
+	b.printAll();
+	debugPrint("------------------------------------------");
 	return 0;
 
 }

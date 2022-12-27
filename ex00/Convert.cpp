@@ -6,7 +6,7 @@
 /*   By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 02:42:18 by fnichola          #+#    #+#             */
-/*   Updated: 2022/12/20 03:22:01 by fnichola         ###   ########.fr       */
+/*   Updated: 2022/12/27 02:53:40 by fnichola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <exception>
 #include <sstream>
 #include <limits>
+#include "debugPrint.hpp"
 #include "Convert.hpp"
 
 
@@ -22,11 +23,13 @@ Convert::Convert() {}
 
 Convert::Convert(const Convert& src)
 {
+	debugPrint("Default constructor called.", BLU);
 	*this = src;
 }
 
 Convert::Convert(const std::string& str)
 {
+	debugPrint("Constructor called with: \"" + str + "\"", BLU);
 	doConversion(str);
 }
 
@@ -92,11 +95,13 @@ void Convert::allErrors(const conversionError err)
 
 void Convert::strToChar(const std::string& str)
 {
+	debugPrint("Converting literal to CHAR", BLU);
 	m_char.value = str.c_str()[0];
 }
 
 void Convert::strToInt(const std::string& str)
 {
+	debugPrint("Converting literal to INT", BLU);
 	std::stringstream ss;
 	ss << str;
 	int num;
@@ -108,6 +113,7 @@ void Convert::strToInt(const std::string& str)
 
 void Convert::strToFloat(const std::string& str)
 {
+	debugPrint("Converting literal to FLOAT", BLU);
 	if (str == "-inff")
 		m_float.value = -std::numeric_limits<float>::infinity();
 	else if (str == "+inff")
@@ -128,6 +134,7 @@ void Convert::strToFloat(const std::string& str)
 
 void Convert::strToDouble(const std::string& str)
 {
+	debugPrint("Converting literal to DOUBLE", BLU);
 	if (str == "-inf")
 		m_double.value = -std::numeric_limits<double>::infinity();
 	else if (str == "+inf")
@@ -303,6 +310,12 @@ std::ostream& operator<<(std::ostream& os, Convert::ConvertedItem<float> item)
 {
 	if (item.err)
 		os << Convert::getErrorMessage(item.err);
+	else if (item.value == std::numeric_limits<float>::infinity())
+		os << "inff";
+	else if (item.value == -std::numeric_limits<float>::infinity())
+		os << "-inff";
+	else if (item.value != item.value)
+		os << "nanf";
 	else if (static_cast<int>(item.value) == item.value)
 		os << item.value << ".0f";
 	else
